@@ -1,0 +1,24 @@
+# Swap USDC — USD Coin Swap Reference
+
+> Exchange Circle's USD Coin (USDC) — the reserve-backed, multi-chain USD stablecoin — for ETH, USDT and other assets through a non-custodial decentralized exchange.
+
+## Key Facts
+- Asset: USDC (USD Coin) — USD-pegged stablecoin issued by Circle, backed by cash and short-dated US Treasuries
+- Network: multi-chain (Ethereum, Base, Solana, Arbitrum, Polygon and more), native and bridged variants
+- Ethereum contract: 0xA0b86991c6218b36c1D19D4a2e9Eb0cE3606eB48
+- Custody: non-custodial — swaps settle through public smart contracts; wallet signs
+- Costs: DEX pool fee + network gas + price impact; spending USDC needs a one-time approval
+- Common route: USDC -> ETH / USDT
+
+## Internal Sections & App Navigation
+- [What is Swap USDC?](#what)
+- [How USDC swaps work](#how)
+- [USDC & Circle](#usdc)
+- [Networks](#networks)
+- [Fees, gas & price impact](#fees)
+- [Is USDC safe?](#safety)
+- [FAQ](#faq)
+- [Open Swap USDC App](dashboard/index.html)
+
+## Disclaimer
+Independent page. Not affiliated with Circle. Not financial advice.

@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://swap-usdc.github.io/sitemap.xml

@@ -1,0 +1,12 @@
+{
+  "name": "Swap USDC",
+  "short_name": "Swap USDC",
+  "description": "Exchange Circle's USD Coin (USDC) for ETH, USDT and other assets through a non-custodial decentralized exchange.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "lang": "en",
+  "background_color": "#0a0e14",
+  "theme_color": "#0a0e14",
+  "icons": [{ "src": "usdc.png", "sizes": "any", "type": "image/png", "purpose": "any" }]
+}
