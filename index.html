@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -108,7 +108,7 @@ h1 a{color:var(--accent)}
 .c6d85f1{position:relative;display:block;padding:1.25rem 3.5rem 1.25rem 1.4rem;cursor:pointer;list-style:none;color:var(--text);font:550 1.05rem/1.5 var(--display)}
 .c6d85f1::-webkit-details-marker{display:none}
 .c6d85f1::after{content:"+";position:absolute;right:1.4rem;top:1.25rem;color:var(--accent);font:400 1.4rem/1.1 var(--body)}
-.c70fa23[open]>.c6d85f1::after,.c70fa23 details[open]>.c6d85f1::after{content:"в€’"}
+.c70fa23[open]>.c6d85f1::after,.c70fa23 details[open]>.c6d85f1::after{content:"−"}
 .c70fa23[open]{border-color:color-mix(in srgb,var(--accent) 35%,transparent)}
 .c6d85f1:focus-visible{outline-offset:-5px;border-radius:var(--radius)}
 .cb8a886{padding:0 1.4rem 1.4rem;color:var(--muted);font-size:.95rem;line-height:1.8;overflow-wrap:anywhere}
@@ -133,7 +133,7 @@ a.ce62fc5{display:block;color:var(--text)}
 <header class="cc6ba41">
 <nav class="c8e211e" aria-label="Main navigation">
 <a class="c7aef89" href="#top"><span class="c82b36b" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 8h15m-4-4 4 4-4 4M20 16H5m4-4-4 4 4 4"/></svg></span>Swap guide</a>
-<div class="c7f4800"><a href="#key-facts">Key facts</a><a href="#sources">Sources</a><a class="c07c44b" href="dashboard/">Open app <span aria-hidden="true">в†—</span></a></div>
+<div class="c7f4800"><a href="#key-facts">Key facts</a><a href="#sources">Sources</a><a class="c07c44b" href="dashboard/">Open app <span aria-hidden="true">↗</span></a></div>
 </nav>
 </header>
 <div class="cc6ba41">
@@ -143,7 +143,7 @@ a.ce62fc5{display:block;color:var(--text)}
 <p class="cffa451">Plan your swap</p>
 <h1 id="hero-title">Swap <em>USDC</em>.</h1>
 <p class="ca168c4">To Swap USDC is to trade the stablecoin for another asset — most often ETH, but any token a decentralized exchange lists — directly against an on-chain liquidity pool rather than a centralized order book. You connect a self-custody wallet, enter the amount, review the rate, the slippage tolerance and the price impact the route will cause, then sign a single transaction. Nothing about the process asks you to deposit funds with a custodian first: the swap settles atomically, and your tokens move from your wallet to the pool and back in the same transaction.</p>
-<a class="c4ac33b" href="dashboard/">Start a swap <span class="c1a74bc" aria-hidden="true">в†—</span></a>
+<a class="c4ac33b" href="dashboard/">Start a swap <span class="c1a74bc" aria-hidden="true">↗</span></a>
 <p class="cceda69">Compare the route. Estimate the rate.</p>
 </div>
 <aside class="c9d0aad" aria-labelledby="estimator-title">
@@ -151,11 +151,11 @@ a.ce62fc5{display:block;color:var(--text)}
 <div class="c7739d8"><h2 id="estimator-title">Swap estimator</h2><span class="c655067">Live estimate</span></div>
 <label class="c21bedc" for="amount">You pay</label>
 <div class="c8c0af8"><input id="amount" type="number" inputmode="decimal" min="1" max="1000000000" step="0.01" value="1000" aria-describedby="amount-help amount-error"><span class="c1ba031">units</span></div>
-<p class="cff8d92" id="amount-help">Enter 1вЂ“1,000,000,000 units, up to two decimal places.</p>
+<p class="cff8d92" id="amount-help">Enter 1–1,000,000,000 units, up to two decimal places.</p>
 <p class="c4c26e9" id="amount-error" aria-live="polite"></p>
 <div class="c26d062" aria-label="Swap route">
 <div class="c22180e"><span>From</span><div class="cffaf56"><img src="assets/tokens/usdc.svg" alt="USD Coin" width="28" height="28"></div></div>
-<span class="ca11eaf" aria-hidden="true">в†’</span>
+<span class="ca11eaf" aria-hidden="true">→</span>
 <div class="c22180e"><span>To</span><div class="cffaf56"><img src="assets/tokens/eth.svg" alt="Ethereum" width="28" height="28"></div></div>
 </div>
 <div class="c6959a7" aria-live="polite" aria-atomic="true">
@@ -163,11 +163,11 @@ a.ce62fc5{display:block;color:var(--text)}
 <div class="cf02792"><output id="received" for="amount">998.25</output><span class="c1ba031">units</span></div>
 <dl class="c4f80ff">
 <div><dt>Estimated fee</dt><dd><output id="fee" for="amount">1.75</output> units</dd></div>
-<div><dt>Estimated time</dt><dd><output id="time" for="amount">5вЂ“7 min</output></dd></div>
+<div><dt>Estimated time</dt><dd><output id="time" for="amount">5–7 min</output></dd></div>
 </dl>
 </div>
-<a class="c4ac33b" href="dashboard/">Continue <span class="c1a74bc" aria-hidden="true">в†’</span></a>
-<p class="c32b728">Fee = 0.15% of the amount + 0.25 units. Time starts at 2вЂ“4 minutes, adding one minute for every tenfold increase from 1 unit, rounded up.</p>
+<a class="c4ac33b" href="dashboard/">Continue <span class="c1a74bc" aria-hidden="true">→</span></a>
+<p class="c32b728">Fee = 0.15% of the amount + 0.25 units. Time starts at 2–4 minutes, adding one minute for every tenfold increase from 1 unit, rounded up.</p>
 <noscript><p class="cff8d92">Enable JavaScript to update the estimate as you change the amount.</p></noscript>
 </div>
 </aside>
@@ -204,7 +204,7 @@ a.ce62fc5{display:block;color:var(--text)}
 <li><a class="ce62fc5" href="https://etherscan.io/token/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48" rel="nofollow noopener" target="_blank">USDC token contract on Etherscan</a></li>
 <li><a class="ce62fc5" href="https://en.wikipedia.org/wiki/Stablecoin" rel="nofollow noopener" target="_blank">Wikipedia — Stablecoin</a></li></ul>
 </section>
-<footer class="c5ee745"><p>Updated Oct 09, 2026</p><a href="#top">Back to top <span aria-hidden="true">в†‘</span></a></footer>
+<footer class="c5ee745"><p>Updated Oct 09, 2026</p><a href="#top">Back to top <span aria-hidden="true">↑</span></a></footer>
 </div>
 <script>
 (() => {
@@ -220,9 +220,9 @@ a.ce62fc5{display:block;color:var(--text)}
     if (!Number.isFinite(value) || !amount.validity.valid) {
       amount.setAttribute('aria-invalid', 'true');
       error.textContent = 'Enter an amount from 1 to 1,000,000,000 with up to two decimal places.';
-      received.value = 'вЂ”';
-      fee.value = 'вЂ”';
-      time.value = 'вЂ”';
+      received.value = '—';
+      fee.value = '—';
+      time.value = '—';
       return;
     }
     amount.removeAttribute('aria-invalid');
@@ -232,7 +232,7 @@ a.ce62fc5{display:block;color:var(--text)}
     const minutes = 2 + Math.ceil(Math.log10(value));
     received.value = format.format((amountCents - feeCents) / 100);
     fee.value = format.format(feeCents / 100);
-    time.value = minutes + 'вЂ“' + (minutes + 2) + ' min';
+    time.value = minutes + '–' + (minutes + 2) + ' min';
   }
   amount.addEventListener('input', () => {
     clearTimeout(timer);
