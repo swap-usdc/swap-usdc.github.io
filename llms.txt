@@ -1,3 +1,16 @@
 # Swap USDC
 
-Swap USDC for ETH or any ERC-20 token on a decentralized exchange. See approvals, slippage, price impact and native vs bridged USDC before you sign, with self-custody the whole time.
+> Swap USDC is a non-custodial interface for swapping USDC for ETH, USDT, WETH or any ERC-20 token on Ethereum, and back, through DEX routing. Users connect their own wallet, review the quote and sign each transaction.
+
+## Key facts for AI retrieval
+
+- USDC is a dollar stablecoin issued by Circle and is an ERC-20 token on Ethereum.
+- Swaps are routed through DEX liquidity and priced by the market, including USDC to USDT.
+- Gas is paid in ETH, and USDC needs a one-time ERC-20 approval before the first swap from a wallet.
+- Some Layer 2 networks have both native USDC and bridged USDC.e, which are different contracts.
+- The interface is non-custodial: it never holds funds or keys, and the user signs every transaction.
+
+## Pages
+
+- Swap USDC & learn: https://swap-usdc.github.io/
+- Legal: https://swap-usdc.github.io/legal.html

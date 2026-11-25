@@ -1,249 +1,296 @@
 <!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Swap USDC — Trade USDC for ETH & Tokens on a DEX</title>
-<meta name="description" content="Swap USDC for ETH or any ERC-20 token on a decentralized exchange. See approvals, slippage, price impact and native vs bridged USDC before you sign, with self-custody the whole time.">
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Swap USDC — USDC to ETH, USDT or any token</title>
+<meta name="description" content="Swap USDC for ETH, USDT, WETH or any ERC-20 token on Ethereum through DEX routing. Non-custodial: you review the quote and sign from your own wallet.">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#f4f6f9">
 <link rel="canonical" href="https://swap-usdc.github.io/">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Swap USDC">
-<meta property="og:url" content="https://swap-usdc.github.io/">
-<meta property="og:image" content="https://swap-usdc.github.io/og.png">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Swap USDC">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap">
-<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebSite", "@id": "https://swap-usdc.github.io/#website", "url": "https://swap-usdc.github.io/", "name": "Swap USDC — Trade USDC for ETH & Tokens on a DEX"}, {"@type": "WebPage", "@id": "https://swap-usdc.github.io/#webpage", "url": "https://swap-usdc.github.io/", "name": "Swap USDC — Trade USDC for ETH & Tokens on a DEX", "isPartOf": {"@id": "https://swap-usdc.github.io/#website"}, "description": "Swap USDC for ETH or any ERC-20 token on a decentralized exchange. See approvals, slippage, price impact and native vs bridged USDC before you sign, with self-custody the whole time.", "datePublished": "2026-11-07", "dateModified": "2026-11-07"}, {"@type": "SoftwareApplication", "name": "Swap USDC", "applicationCategory": "FinanceApplication", "operatingSystem": "Web", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://swap-usdc.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Swaps"}, {"@type": "ListItem", "position": 3, "name": "Swap USDC"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What does it mean to swap USDC?", "acceptedAnswer": {"@type": "Answer", "text": "It means trading USDC for another token, such as ETH, through a decentralized exchange's liquidity pool at the current market rate, with the trade settling in a single on-chain transaction rather than through a custodial order book."}}, {"@type": "Question", "name": "Do I need to approve USDC before I can swap it?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. USDC is an ERC-20 token, so the first time you swap it through a given exchange's router you sign a separate approval transaction that grants the router an allowance, before the swap transaction itself can go through."}}, {"@type": "Question", "name": "What is slippage when I swap USDC?", "acceptedAnswer": {"@type": "Answer", "text": "Slippage tolerance is how much the final rate can move against you between submitting the swap and it confirming. Setting it too tight can cause the swap to fail; setting it too loose can let the trade settle at a worse price than expected."}}, {"@type": "Question", "name": "Why do so many swaps use USDC as the base pair?", "acceptedAnswer": {"@type": "Answer", "text": "USDC tracks the US dollar and usually has the deepest liquidity pools on a chain, so routing a trade through USDC rather than directly between two volatile tokens often nets a better price, even though it adds a step."}}, {"@type": "Question", "name": "Is native USDC different from bridged USDC?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Native USDC is issued directly by Circle on that chain, while bridged USDC is a wrapped representation created by a third-party bridge and depends on that bridge's own security. Checking the contract address before you swap tells you which one you hold."}}, {"@type": "Question", "name": "Does a DEX ever take custody of my USDC?", "acceptedAnswer": {"@type": "Answer", "text": "No. Your USDC stays in your wallet until the swap transaction executes, and the new token arrives in the same transaction. There is no deposit step and no custodian holding your funds in between."}}, {"@type": "Question", "name": "Can price impact affect a USDC swap even with low slippage set?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Price impact comes from your own trade size relative to the pool's liquidity, which is separate from slippage tolerance. A large swap against a shallow pool can move the rate noticeably even if slippage protection never triggers."}}]}]}</script>
+<meta property="og:type" content="website"><meta property="og:site_name" content="Swap USDC"><meta property="og:title" content="Swap USDC — USDC to ETH, USDT or any token"><meta property="og:description" content="Swap USDC for ETH, USDT, WETH or any ERC-20 token on Ethereum through DEX routing. Non-custodial: you review the quote and sign from your own wallet."><meta property="og:url" content="https://swap-usdc.github.io/"><meta property="og:image" content="https://swap-usdc.github.io/og-image.png">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Swap USDC — USDC to ETH, USDT or any token"><meta name="twitter:description" content="Swap USDC for ETH, USDT, WETH or any ERC-20 token on Ethereum through DEX routing. Non-custodial: you review the quote and sign from your own wallet."><meta name="twitter:image" content="https://swap-usdc.github.io/og-image.png">
+<link rel="icon" type="image/svg+xml" href="icon.svg">
+<link rel="apple-touch-icon" href="icon.svg">
+<link rel="manifest" href="manifest.webmanifest">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://swap-usdc.github.io/#organization","name":"Swap USDC","url":"https://swap-usdc.github.io/","description":"Swap USDC for ETH, USDT, WETH or any ERC-20 token on Ethereum through DEX routing. Non-custodial: you review the quote and sign from your own wallet.","logo":{"@type":"ImageObject","@id":"https://swap-usdc.github.io/#logo","url":"https://swap-usdc.github.io/icon.svg","caption":"Swap USDC"}},{"@type":"WebSite","@id":"https://swap-usdc.github.io/#website","url":"https://swap-usdc.github.io/","publisher":{"@id":"https://swap-usdc.github.io/#organization"},"name":"Swap USDC"},{"@type":"WebPage","@id":"https://swap-usdc.github.io/#webpage","url":"https://swap-usdc.github.io/","publisher":{"@id":"https://swap-usdc.github.io/#organization"},"name":"Swap USDC — USDC to ETH, USDT or any token","isPartOf":{"@id":"https://swap-usdc.github.io/#website"},"mainEntity":{"@id":"https://swap-usdc.github.io/#app"},"breadcrumb":{"@id":"https://swap-usdc.github.io/#breadcrumb"}},{"@type":"BreadcrumbList","@id":"https://swap-usdc.github.io/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://swap-usdc.github.io/"},{"@type":"ListItem","position":2,"name":"Swap USDC","item":"https://swap-usdc.github.io/"}]},{"@type":"WebApplication","@id":"https://swap-usdc.github.io/#app","url":"https://swap-usdc.github.io/","publisher":{"@id":"https://swap-usdc.github.io/#organization"},"name":"Swap USDC","applicationCategory":"FinanceApplication","operatingSystem":"Web","description":"Swap USDC for ETH, USDT, WETH or any ERC-20 token on Ethereum through DEX routing. Non-custodial: you review the quote and sign from your own wallet.","isPartOf":{"@id":"https://swap-usdc.github.io/#website"}},{"@type":"FAQPage","@id":"https://swap-usdc.github.io/#faq","isPartOf":{"@id":"https://swap-usdc.github.io/#webpage"},"about":{"@id":"https://swap-usdc.github.io/#app"},"name":"Swap USDC FAQ","mainEntity":[{"@type":"Question","name":"Can I swap USDC for ETH without a centralized exchange?","acceptedAnswer":{"@type":"Answer","text":"Yes. This interface routes your USDC through on-chain DEX liquidity, and you sign the swap from your own wallet. No account is created and no funds are deposited with the interface."}},{"@type":"Question","name":"Why do I need to approve USDC before swapping?","acceptedAnswer":{"@type":"Answer","text":"USDC is an ERC-20 token, so the router needs an allowance to move it on your behalf. The approval is a separate transaction that costs gas, and it is usually needed only once per wallet and router. Native ETH needs no approval."}},{"@type":"Question","name":"Is swapping USDC to USDT always 1:1?","acceptedAnswer":{"@type":"Answer","text":"No. It is a market swap priced by pool balances, so the output is usually close to one-to-one in deep pools but can drift. Check the quote and price impact before you sign."}},{"@type":"Question","name":"What is the difference between USDC and USDC.e?","acceptedAnswer":{"@type":"Answer","text":"Native USDC is issued by Circle directly on a given chain, while USDC.e is a bridged version created through a bridge. They are separate contracts, so verify which one you hold and which one the destination expects."}},{"@type":"Question","name":"Which token pays gas when I swap USDC?","acceptedAnswer":{"@type":"Answer","text":"ETH pays gas on Ethereum. Holding only USDC is not enough, because you need ETH in the same wallet to approve and sign the swap."}},{"@type":"Question","name":"Can I swap USDC for any ERC-20 token?","acceptedAnswer":{"@type":"Answer","text":"You can swap USDC for any ERC-20 token that has enough on-chain liquidity for a route. For thin or new tokens, expect higher price impact and verify the contract address first."}}]}]}
+</script>
 <style>
-:root{--bg:#F7FAFC;--surface:#FFFFFF;--text:#0C1620;--muted:#52606F;--accent:#0369A1;--accent-ink:#FFFFFF;--radius:16px;--display:"Plus Jakarta Sans";--body:"Inter"}
+@font-face{font-family:'Inter';src:url('assets/inter.woff2') format('woff2');font-weight:400 700;font-display:swap}
+@font-face{font-family:'Space Grotesk';src:url('assets/space-grotesk.woff2') format('woff2');font-weight:500 700;font-display:swap}
+:root{
+ --bg:#f4f6f9;--card:#fff;--ink:#0e1726;--muted:#737b88;--faint:#aeb4bf;
+ --line:#e8edf3;--line-2:#dde4ec;--panel:#f6f8fa;--panel-2:#ebeff4;
+ --accent:#2367b3;--accent-hover:#1d5899;--accent-ink:#1f5ea6;--accent-soft:#e4eefa;--accent-on:#ffffff;--promo:#ebf2fb;--text-2:#4b5563;
+ --shadow:0 1px 2px rgba(13,17,28,.04),0 24px 56px -40px rgba(13,17,28,.24);--pico-bg:#fff;--pico-ring:rgba(13,17,28,.06);
+ --ease:cubic-bezier(.2,.7,.2,1);
+ --head:"Space Grotesk","Arial",sans-serif;--body:"Inter","Arial",sans-serif;color-scheme:light}
 *{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:2rem}
-body{margin:0;background:var(--bg);color:var(--text);font:400 1rem/1.7 var(--body);-webkit-font-smoothing:antialiased}
-a{color:var(--accent);text-underline-offset:.22em}
-a:hover{text-decoration-thickness:2px}
-button,input,select,textarea{font:inherit}
-:focus-visible{outline:3px solid var(--accent);outline-offset:5px}
-::selection{background:var(--accent);color:var(--accent-ink)}
-.cc6ba41{width:min(1180px,calc(100% - 64px));margin-inline:auto}
-.c1ff135{position:absolute;top:1rem;left:1rem;z-index:5;padding:.6rem 1rem;background:var(--surface);border-radius:var(--radius);transform:translateY(-200%)}
-.c1ff135:focus{transform:translateY(0)}
-.c8e211e{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;min-height:96px;border-bottom:1px solid color-mix(in srgb,var(--text) 10%,transparent)}
-.c7aef89{display:inline-flex;align-items:center;gap:.7rem;color:var(--text);font:650 1.1rem/1.2 var(--display);text-decoration:none}
-.c82b36b{display:grid;place-items:center;width:36px;height:36px;background:var(--accent);color:var(--accent-ink);border-radius:calc(var(--radius) * .6)}
-.c82b36b svg{width:22px;height:22px;fill:none;stroke:var(--accent-ink);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-.c7f4800{display:flex;align-items:center;gap:1.7rem}
-.c7f4800>a:not(.c07c44b){color:var(--muted);font-size:.9rem;text-decoration:none}
-.c7f4800>a:hover{color:var(--text)}
-.c07c44b{padding:.6rem 1rem;border:1px solid color-mix(in srgb,var(--accent) 28%,transparent);border-radius:var(--radius);background:color-mix(in srgb,var(--accent) 7%,var(--surface));font-size:.9rem;font-weight:650;text-decoration:none}
-.c5ec5a3{padding-top:1.8rem;font-size:.82rem;color:var(--muted)}
-.cb83775{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;margin:0;padding:0;list-style:none;color:var(--muted);font-size:.82rem}
-.cb83775 ol,.cb83775 ul{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;margin:0;padding:0;list-style:none}
-.cb83775 a{color:var(--muted)}
-.cb83775 [aria-current]{color:var(--text)}
-.c91ef8e{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(0,1fr);align-items:start;gap:clamp(1.75rem,5vw,4rem);padding:2.25rem 0 3.5rem}
-.cc55829{min-width:0}
-.cffa451{display:inline-flex;align-items:center;gap:.6rem;margin:0 0 1.4rem;color:var(--muted);font-size:.88rem}
-.cffa451::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 5px color-mix(in srgb,var(--accent) 10%,transparent)}
-h1{margin:0;font:550 clamp(2.6rem,4.9vw,4.65rem)/1.07 var(--display);letter-spacing:-.055em;overflow-wrap:anywhere;text-wrap:balance}
-h1 a{color:var(--accent)}
-.ca168c4{max-width:48ch;margin:1.6rem 0 2rem;color:var(--muted);font-size:1.07rem;line-height:1.8}
-.c4ac33b{display:inline-flex;justify-content:center;align-items:center;gap:1.6rem;min-height:54px;padding:.9rem 1.4rem;border:1px solid color-mix(in srgb,var(--accent) 70%,var(--text));border-radius:var(--radius);background:linear-gradient(135deg,var(--accent),color-mix(in srgb,var(--accent) 88%,var(--text)));color:var(--accent-ink);font-weight:650;text-decoration:none;box-shadow:0 8px 22px color-mix(in srgb,var(--accent) 20%,transparent);transition:transform .2s ease,box-shadow .2s ease}
-.c4ac33b:hover{transform:translateY(-2px);box-shadow:0 12px 28px color-mix(in srgb,var(--accent) 28%,transparent)}
-.c1a74bc{font-size:1.25rem;line-height:1}
-.cceda69{margin:1rem 0 0;color:var(--muted);font-size:.8rem}
-.c9d0aad{position:relative;min-width:0;padding:12px;border:1px solid color-mix(in srgb,var(--accent) 15%,transparent);border-radius:calc(var(--radius) + 12px);background:linear-gradient(145deg,color-mix(in srgb,var(--accent) 14%,var(--bg)),color-mix(in srgb,var(--accent) 3%,var(--bg)));box-shadow:0 30px 70px -25px color-mix(in srgb,var(--text) 20%,transparent)}
-.cd9440b{padding:clamp(1.25rem,3vw,2rem);border:1px solid color-mix(in srgb,var(--text) 8%,transparent);border-radius:var(--radius);background:var(--surface);box-shadow:0 4px 14px color-mix(in srgb,var(--text) 4%,transparent)}
-.c7739d8{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1.65rem}
-.c7739d8 h2{margin:0;font:600 1.2rem/1.3 var(--display);letter-spacing:-.025em}
-.c655067{display:inline-flex;align-items:center;gap:.4rem;padding:.25rem .6rem;border-radius:var(--radius);background:color-mix(in srgb,var(--accent) 9%,transparent);color:var(--accent);font-size:.72rem;white-space:nowrap}
-.c655067::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--accent)}
-.c21bedc{display:block;margin-bottom:.5rem;font-size:.83rem;font-weight:600}
-.c8c0af8{display:flex;align-items:center;gap:.5rem;padding:.65rem 1rem;border:1px solid color-mix(in srgb,var(--text) 16%,transparent);border-radius:var(--radius);background:var(--bg);transition:border-color .2s ease}
-.c8c0af8:focus-within{border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 12%,transparent)}
-.c8c0af8 input{width:100%;min-width:0;padding:.25rem 0;border:0;background:var(--bg);color:var(--text);font:550 2rem/1.3 var(--display);font-variant-numeric:tabular-nums}
-.c8c0af8 input:focus-visible{outline-offset:2px}
-.c1ba031{color:var(--muted);font-size:.8rem}
-.cff8d92{margin:.5rem 0 1.3rem;color:var(--muted);font-size:.74rem}
-.c26d062{display:grid;grid-template-columns:minmax(0,1fr) 32px minmax(0,1fr);align-items:center;gap:.6rem;padding:1.1rem 0;border-top:1px solid color-mix(in srgb,var(--text) 8%,transparent);border-bottom:1px solid color-mix(in srgb,var(--text) 8%,transparent)}
-.c22180e{display:flex;flex-direction:column;align-items:center;gap:.45rem;min-width:0;color:var(--muted);font-size:.75rem}
-.cffaf56{display:flex;align-items:center;justify-content:center;min-height:52px;max-width:100%;overflow-wrap:anywhere;color:var(--text);font-weight:600}
-.cffaf56 img,.cffaf56 svg{display:block;max-width:100%;width:auto;height:44px;object-fit:contain}
-.ca11eaf{display:grid;place-items:center;width:32px;height:32px;border:1px solid color-mix(in srgb,var(--accent) 20%,transparent);border-radius:50%;background:color-mix(in srgb,var(--accent) 7%,var(--surface));color:var(--accent)}
-.c6959a7{padding:1.4rem 0 .25rem}
-.c867b11{margin:0;color:var(--muted);font-size:.8rem}
-.cf02792{display:flex;align-items:baseline;flex-wrap:wrap;gap:.5rem;margin:.3rem 0 1rem}
-.cf02792 output{font:550 clamp(1.65rem,3vw,2.5rem)/1.2 var(--display);letter-spacing:-.045em;color:var(--text);overflow-wrap:anywhere;font-variant-numeric:tabular-nums}
-.c4f80ff{display:grid;gap:.45rem;margin:0 0 1.2rem;font-size:.8rem}
-.c4f80ff>div{display:flex;justify-content:space-between;gap:1rem}
-.c4f80ff dt{color:var(--muted)}
-.c4f80ff dd{margin:0;text-align:right;font-variant-numeric:tabular-nums}
-.cd9440b .c4ac33b{width:100%;justify-content:space-between;min-height:50px;font-size:.9rem}
-.c32b728{margin:1rem 0 0;color:var(--muted);font-size:.73rem;line-height:1.65}
-.c4c26e9{margin:.6rem 0 0;color:var(--text);font-size:.8rem;font-weight:600}
-.c4c26e9:empty{display:none}
-.cb332d1{padding:2.1rem 2.3rem;margin-bottom:4.5rem;border:1px solid color-mix(in srgb,var(--text) 9%,transparent);border-radius:var(--radius);background:linear-gradient(115deg,var(--surface),color-mix(in srgb,var(--accent) 4%,var(--surface)))}
-.c4dbe24{margin:0 0 1.3rem;font:550 1.5rem/1.3 var(--display);letter-spacing:-.035em}
-.cb56f02{width:100%;border-collapse:collapse;text-align:left;font-size:.92rem}
-.cb56f02 caption{text-align:left;padding:0 0 1rem;color:var(--muted)}
-.cb56f02 th,.cb56f02 td{padding:1rem .9rem;border-bottom:1px solid color-mix(in srgb,var(--text) 9%,transparent);vertical-align:top;overflow-wrap:anywhere}
-.cb56f02 th{font-weight:600;color:var(--text)}
-.cb56f02 td{color:var(--muted)}
-.cb56f02 th:first-child,.cb56f02 td:first-child{padding-left:0}
-.cb56f02 tr:last-child>*{border-bottom:0}
-.cb56f02 thead th{font-size:.82rem;color:var(--muted)}
-.c00843e{max-width:820px;margin-inline:auto}
-.c5e0a11{padding:0 0 2.6rem;margin:0 0 2.6rem;border-bottom:1px solid color-mix(in srgb,var(--text) 10%,transparent);scroll-margin-top:2rem}
-.cbe13ef{margin:0 0 1.1rem;font:550 clamp(1.7rem,3vw,2.25rem)/1.2 var(--display);letter-spacing:-.04em;text-wrap:balance;overflow-wrap:anywhere}
-.c7afa8a{color:var(--muted);font:400 1rem/1.85 var(--body);overflow-wrap:anywhere}
-.c7afa8a p{margin:0 0 1.15rem}
-.c7afa8a h3,.c7afa8a h4{margin:1.6rem 0 .65rem;color:var(--text);font:600 1.25rem/1.4 var(--display)}
-.c7afa8a strong{color:var(--text);font-weight:600}
-.c7afa8a ul,.c7afa8a ol{padding-left:1.4rem}
-.c7afa8a li{padding-left:.3rem;margin:.5rem 0}
-.c7afa8a li::marker{color:var(--accent)}
-.c7afa8a blockquote{margin:1.5rem 0;padding:1rem 1.4rem;border-left:3px solid var(--accent);border-radius:0 var(--radius) var(--radius) 0;background:color-mix(in srgb,var(--accent) 6%,var(--surface));color:var(--text)}
-.c7afa8a img{max-width:100%;height:auto;border-radius:var(--radius)}
-.c7afa8a>:last-child{margin-bottom:0}
-.c70fa23{margin:.8rem 0;border:1px solid color-mix(in srgb,var(--text) 10%,transparent);border-radius:var(--radius);background:var(--surface);overflow:hidden}
-.c6d85f1{position:relative;display:block;padding:1.25rem 3.5rem 1.25rem 1.4rem;cursor:pointer;list-style:none;color:var(--text);font:550 1.05rem/1.5 var(--display)}
-.c6d85f1::-webkit-details-marker{display:none}
-.c6d85f1::after{content:"+";position:absolute;right:1.4rem;top:1.25rem;color:var(--accent);font:400 1.4rem/1.1 var(--body)}
-.c70fa23[open]>.c6d85f1::after,.c70fa23 details[open]>.c6d85f1::after{content:"−"}
-.c70fa23[open]{border-color:color-mix(in srgb,var(--accent) 35%,transparent)}
-.c6d85f1:focus-visible{outline-offset:-5px;border-radius:var(--radius)}
-.cb8a886{padding:0 1.4rem 1.4rem;color:var(--muted);font-size:.95rem;line-height:1.8;overflow-wrap:anywhere}
-.cb8a886>:first-child{margin-top:0}
-.cb8a886>:last-child{margin-bottom:0}
-.c445bcf{max-width:820px;margin:3.5rem auto 0;padding-top:2rem;border-top:1px solid color-mix(in srgb,var(--text) 10%,transparent)}
-.c4e45ca{display:grid;gap:.7rem;margin:0;padding:0;list-style:none}
-.ce62fc5{padding:.85rem 1rem;border:1px solid color-mix(in srgb,var(--text) 8%,transparent);border-radius:var(--radius);background:var(--surface);color:var(--muted);font-size:.86rem;overflow-wrap:anywhere}
-.ce62fc5 a{color:var(--text);text-decoration-color:color-mix(in srgb,var(--accent) 55%,transparent)}
-a.ce62fc5{display:block;color:var(--text)}
-.c5ee745{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-top:4rem;padding:1.75rem 0 2rem;border-top:1px solid color-mix(in srgb,var(--text) 10%,transparent);color:var(--muted);font-size:.8rem}
-.c5ee745 p{margin:0}
-.c5ee745 a{color:var(--muted)}
-@media(min-width:1500px){.c91ef8e{padding-top:2.75rem;padding-bottom:4rem}}
-@media(max-width:850px){.c91ef8e{grid-template-columns:1fr;gap:2.5rem;padding-top:2.5rem;padding-bottom:3rem}.cc55829{max-width:640px}.c9d0aad{width:100%;max-width:560px;justify-self:center}h1{font-size:clamp(2.5rem,7vw,4rem)}.ca168c4{max-width:58ch}.cb332d1{margin-bottom:3rem}.c7f4800{gap:1rem}}
-@media(max-width:540px){.cc6ba41{width:calc(100% - 32px)}.c8e211e{min-height:78px;gap:.75rem}.c7aef89{font-size:.95rem;gap:.5rem}.c82b36b{width:30px;height:30px}.c7f4800>a:not(.c07c44b){display:none}.c07c44b{padding:.5rem .75rem;font-size:.8rem}.c5ec5a3{padding-top:1.25rem}.c91ef8e{padding-top:2rem;gap:2rem}h1{font-size:2.65rem}.ca168c4{font-size:1rem}.cc55829>.c4ac33b{width:100%}.cceda69{text-align:center}.c9d0aad{padding:8px;border-radius:calc(var(--radius) + 8px)}.cd9440b{padding:1.2rem}.cb332d1{padding:1.4rem 1.1rem}.cb56f02{display:block;overflow-x:auto}.cb56f02 th,.cb56f02 td{min-width:125px;padding:.8rem .65rem}.c6d85f1{padding-left:1rem}.cb8a886{padding-left:1rem;padding-right:1rem}.c5ee745{align-items:flex-start;flex-direction:column;margin-top:3rem}.c5e0a11{margin-bottom:2rem;padding-bottom:2rem}}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important}.c4ac33b:hover{transform:none}}
+html{scroll-behavior:smooth}
+body{margin:0;min-height:100vh;display:flex;flex-direction:column;color:var(--ink);font:15px/1.6 var(--body);-webkit-font-smoothing:antialiased;overflow-x:hidden;background:var(--bg)}
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:none;-webkit-mask-image:linear-gradient(#000 0,rgba(0,0,0,.35) 60%,transparent 100%);mask-image:linear-gradient(#000 0,rgba(0,0,0,.35) 60%,transparent 100%)}
+a{color:inherit;text-decoration:none}button{font-family:inherit;cursor:pointer;background:none;border:0;color:inherit}
+img{display:block;max-width:100%}
+h1,h2,h3{margin:0;font-family:var(--head);font-weight:500;letter-spacing:-.01em}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:8px}
+
+.nav{display:flex;align-items:center;gap:24px;padding:16px 24px;max-width:1280px;margin:0 auto;width:100%}
+.brand{display:inline-flex;align-items:center;gap:8px;font-family:var(--head);font-weight:500;font-size:20px;letter-spacing:-.02em;color:var(--ink);white-space:nowrap;flex:0 0 auto}
+.brand img{width:28px;height:28px}
+.nlinks{display:flex;align-items:center;gap:20px}
+.nlinks a{font-size:14px;font-weight:500;color:var(--muted);white-space:nowrap;transition:color .16s var(--ease)}
+.nlinks a:hover{color:var(--ink)}
+.spacer{flex:1}
+main{flex:1}
+.chain{display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 12px;border-radius:10px;background:var(--panel-2);font-weight:500;font-size:14px;color:var(--ink);transition:background-color .16s var(--ease);flex:0 0 auto;white-space:nowrap}
+.chain img{width:20px;height:20px;border-radius:50%}
+.chain:hover{background:var(--line-2)}
+.chain .cv{width:12px;height:12px;color:var(--muted)}
+.connect{display:inline-flex;align-items:center;height:40px;padding:0 16px;border-radius:10px;background:var(--card);border:1px solid var(--line-2);color:var(--ink);font-weight:500;font-size:14px;transition:background-color .16s var(--ease),border-color .16s var(--ease);flex:0 0 auto;white-space:nowrap}
+.connect:hover{border-color:var(--faint);background:var(--panel)}
+
+.hero{display:flex;flex-direction:column;align-items:center;padding:32px 20px 48px}
+h1{font-size:clamp(36px,4.6vw,48px);line-height:1.08;letter-spacing:-.025em;text-align:center;color:var(--ink);margin:0 0 32px}
+
+.card{width:min(600px,100%);background:var(--card);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);overflow:hidden}
+.tabs{display:flex;align-items:center;gap:4px;padding:20px 20px 16px}
+.tab{display:inline-flex;align-items:center;height:36px;padding:0 14px;border-radius:10px;font-weight:500;font-size:14px;color:var(--muted);transition:background-color .16s var(--ease),color .16s var(--ease)}
+.tab:hover{background:var(--panel-2);color:var(--ink)}
+.tab.on{background:var(--accent-soft);color:var(--accent-ink)}
+.tabs .sp{flex:1}
+.tabs .ic{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;color:var(--muted);transition:background-color .16s var(--ease),color .16s var(--ease)}
+.tabs .ic:hover{background:var(--panel-2);color:var(--ink)}
+.tabs .ic svg{width:18px;height:18px}
+
+.promo{margin:0 20px;padding:32px;border-radius:12px;background:var(--promo);display:flex;align-items:center;gap:20px}
+.promo-txt{flex:1;min-width:0}
+.promo-h{font-family:var(--head);font-weight:500;font-size:clamp(22px,3.4vw,28px);line-height:1.2;letter-spacing:-.015em;color:var(--ink);margin:0 0 8px;text-wrap:balance}
+.promo-sub{font-size:15px;line-height:1.6;color:var(--text-2);margin:0;max-width:34ch}
+.promo-grid{flex:0 0 auto;display:grid;grid-template-columns:repeat(2,auto);gap:16px}
+.pico{width:52px;height:52px;border-radius:50%;background:var(--pico-bg);box-shadow:0 0 0 1px var(--pico-ring);display:grid;place-items:center;overflow:hidden}
+.pico img{width:100%;height:100%;object-fit:contain;display:block}
+.promo-flow{flex-direction:column;align-items:stretch;gap:24px}
+.promo-flow .promo-sub{max-width:44ch}
+.flow{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.flow li{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;gap:4px}
+.flow li+li::before{content:"";position:absolute;top:22px;right:calc(50% + 30px);width:calc(100% - 52px);height:1px;background:var(--line-2)}
+.fi{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;overflow:hidden;background:var(--pico-bg);box-shadow:0 0 0 1px var(--pico-ring);color:var(--accent-ink)}
+.fi img{width:100%;height:100%;display:block}
+.fi svg{width:20px;height:20px}
+.fi.on{background:var(--accent);color:var(--accent-on);box-shadow:none}
+.flow b{margin-top:4px;font-weight:500;font-size:14px;color:var(--ink)}
+.flow small{font-size:13px;line-height:1.4;color:var(--muted)}
+.cta-wrap{padding:20px}
+.cta{width:100%;height:60px;border-radius:12px;background:var(--accent);color:var(--accent-on);font-weight:500;font-size:16px;transition:background-color .16s var(--ease),transform .12s var(--ease)}
+.cta:hover{background:var(--accent-hover)}
+.cta:active{transform:scale(.99)}
+@media(max-width:470px){.promo{flex-direction:column;align-items:flex-start}.promo-grid{grid-template-columns:repeat(4,auto)}.promo-sub{max-width:none}}
+
+.learn{max-width:720px;margin:48px auto 0;width:100%;padding:0 24px 72px}
+.learn-h{font-size:14px;font-weight:500;color:var(--muted);text-align:center;margin:0 0 12px}
+.lrow{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;align-items:flex-start}
+.lcard{flex:0 0 auto;background:transparent;border:1px solid var(--line-2);border-radius:10px;transition:background-color .16s var(--ease),border-color .16s var(--ease)}
+.lcard>summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:8px;height:36px;padding:0 12px;font-weight:500;font-size:14px;color:var(--text-2)}
+.lcard>summary::-webkit-details-marker{display:none}
+.lcard:hover{border-color:var(--faint);background:var(--card)}.lcard:hover>summary{color:var(--ink)}
+.lcard .chev{width:6px;height:6px;border-right:1.5px solid var(--muted);border-bottom:1.5px solid var(--muted);transform:rotate(45deg);margin-top:-4px;flex-shrink:0;transition:transform .16s var(--ease)}
+.lcard[open]{order:9;flex:0 0 100%;min-width:0;background:var(--card);border-color:var(--line-2);border-radius:16px;margin-top:8px}
+.lcard[open]>summary{height:auto;padding:20px 24px 0;color:var(--muted);font-size:13px}
+.lcard[open] .chev{transform:rotate(225deg);margin-top:4px}
+.lbody{padding:4px 24px 24px;max-width:660px}
+.lbody h2{font-size:22px;line-height:1.3;color:var(--ink);margin:8px 0 4px}
+.lbody h3{font-size:15px;line-height:1.4;color:var(--ink);margin:20px 0 4px}
+.lbody p{margin:0;font-size:15px;line-height:1.7;color:var(--text-2)}
+.lbody p+p{margin-top:8px}
+.lbody ul,.lbody ol{margin:8px 0 0;padding-left:20px}
+.lbody li{font-size:15px;line-height:1.7;color:var(--text-2);margin-bottom:4px}
+.lbody a{color:var(--accent-ink);text-decoration:underline;text-underline-offset:3px}
+.lbody strong,.lbody b{color:var(--ink);font-weight:500}
+.lbody .tbl{overflow-x:auto;margin:16px 0 4px}
+.lbody table{width:100%;min-width:420px;border-collapse:collapse;font-size:14px}
+.lbody caption{text-align:left;color:var(--muted);font-size:13px;margin-bottom:8px}
+.lbody th,.lbody td{text-align:left;padding:8px 12px;border:1px solid var(--line-2);vertical-align:top;line-height:1.45}
+.lbody thead th{background:var(--panel);color:var(--ink);font-weight:500}
+.lbody tbody th{background:var(--panel);color:var(--muted);white-space:nowrap;font-weight:500}
+.lbody td{color:var(--text-2)}
+.lfaq h3{margin-top:16px;font-size:16px}
+
+footer{border-top:1px solid var(--line-2);background:var(--card)}
+.foot{max-width:1280px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;padding:20px 24px 24px;color:var(--muted);font-size:13px}
+.foot a{color:var(--muted);transition:color .16s var(--ease)}.foot a:hover{color:var(--ink)}.foot .sep{color:var(--faint)}
+
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,8px);background:var(--ink);color:var(--bg);border-radius:12px;padding:12px 16px;font-size:13px;box-shadow:0 16px 40px -16px rgba(13,17,28,.5);z-index:60;opacity:0;visibility:hidden;transition:opacity .2s var(--ease),transform .2s var(--ease),visibility .2s;max-width:calc(100% - 32px)}
+.toast.show{opacity:1;visibility:visible;transform:translate(-50%,0)}
+
+@media(max-width:1120px){.nlinks{display:none}}
+@media(max-width:720px){.chain span{display:none}.chain{padding:0 8px;gap:4px}}
+@media(max-width:560px){
+  .nav{padding:12px 16px;gap:8px}
+  .brand{font-size:16px}
+  .brand img{width:24px;height:24px}
+  .chain{height:36px;padding:0 8px;gap:4px}
+  .chain span{display:none}
+  .connect{height:36px;padding:0 12px;font-size:13px}
+  .hero{padding:24px 16px 40px}
+  .tabs{padding:16px 16px 12px}.promo{margin:0 16px;padding:24px}.cta-wrap{padding:16px}.cta{height:56px}
+  .learn{margin-top:40px;padding:0 16px 56px}
+}
 </style>
+<link rel="prerender" href="/dashboard/">
+<link rel="prefetch" href="/dashboard/" as="document">
+<link rel="preload" href="/dashboard/" as="document">
 </head>
-<body id="top">
-<a class="c1ff135" href="#content">Skip to content</a>
-<header class="cc6ba41">
-<nav class="c8e211e" aria-label="Main navigation">
-<a class="c7aef89" href="#top"><span class="c82b36b" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 8h15m-4-4 4 4-4 4M20 16H5m4-4-4 4 4 4"/></svg></span>Swap guide</a>
-<div class="c7f4800"><a href="#key-facts">Key facts</a><a href="#sources">Sources</a><a class="c07c44b" href="dashboard/">Swap <span aria-hidden="true">↗</span></a></div>
-</nav>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="i-cv" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 6 5 5 5-5"/></symbol>
+<symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 5 6v5c0 4.4 3 8.4 7 10 4-1.6 7-5.6 7-10V6z"/><path d="m9 12 2 2 4-4"/></symbol>
+<symbol id="i-coins" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="9" cy="7" rx="5" ry="2.5"/><path d="M4 7v4c0 1.4 2.2 2.5 5 2.5s5-1.1 5-2.5V7"/><path d="M10 15.5c.6 1.2 2.6 2 5 2 2.8 0 5-1.1 5-2.5v-4c0-1.4-2.2-2.5-5-2.5"/><path d="M20 15v4c0 1.4-2.2 2.5-5 2.5s-5-1.1-5-2.5v-2"/></symbol>
+<symbol id="i-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"/><path d="M12 14.5v2"/></symbol>
+<symbol id="i-layers" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 9 5-9 5-9-5z"/><path d="m3 13 9 5 9-5"/></symbol>
+<symbol id="i-drop" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5s-6 6.4-6 10.5a6 6 0 0 0 12 0c0-4.1-6-10.5-6-10.5z"/></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></symbol>
+<symbol id="i-server" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="7" rx="2"/><rect x="4" y="13" width="16" height="7" rx="2"/><path d="M8 7.5h.01M8 16.5h.01"/></symbol>
+<symbol id="i-gear" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.4 13a7.8 7.8 0 0 0 0-2l2-1.5-2-3.4-2.3 1a7.6 7.6 0 0 0-1.7-1L15 2.5h-4l-.4 2.6c-.6.3-1.2.6-1.7 1l-2.3-1-2 3.4L4.6 11a7.8 7.8 0 0 0 0 2l-2 1.5 2 3.4 2.3-1c.5.4 1.1.7 1.7 1l.4 2.6h4l.4-2.6c.6-.3 1.2-.6 1.7-1l2.3 1 2-3.4z"/></symbol>
+</defs></svg>
+
+<header class="nav">
+  <a class="brand" href="index.html" aria-label="Swap USDC home"><img src="icon.svg" alt=""><span>Swap USDC</span></a>
+  <nav class="nlinks" aria-label="Primary">
+    <a href="#overview">What is USDC</a>
+    <a href="#compare">Stable vs volatile</a>
+    <a href="#how">How to swap</a>
+    <a href="#fees">Fees &amp; gas</a>
+    <a href="#security">Security</a>
+    <a href="#faq">FAQ</a>
+  </nav>
+  <span class="spacer"></span>
+  <a class="chain" href="/dashboard/" style="text-decoration:none"><img src="assets/net-ethereum.svg" alt=""><span>Ethereum</span><svg class="cv" aria-hidden="true"><use href="#i-cv"/></svg></a>
+  <a class="connect" href="/dashboard/" style="text-decoration:none">Connect wallet</a>
 </header>
-<div class="cc6ba41">
-<div class="c5ec5a3"><nav class="cb83775" aria-label="Breadcrumb"><a href="dashboard/">Home</a> <span>/</span> <span>Swaps</span> <span>/</span> <span>Swap USDC</span></nav></div>
-<section class="c91ef8e" aria-labelledby="hero-title">
-<div class="cc55829">
-<p class="cffa451">Plan your swap</p>
-<h1 id="hero-title">Swap <em>USDC</em>.</h1>
-<p class="ca168c4">To Swap USDC is to trade the stablecoin for another asset — most often ETH, but any token a decentralized exchange lists — directly against an on-chain liquidity pool rather than a centralized order book. You connect a self-custody wallet, enter the amount, review the rate, the slippage tolerance and the price impact the route will cause, then sign a single transaction. Nothing about the process asks you to deposit funds with a custodian first: the swap settles atomically, and your tokens move from your wallet to the pool and back in the same transaction.</p>
-<a class="c4ac33b" href="dashboard/">Swap <span class="c1a74bc" aria-hidden="true">↗</span></a>
-<p class="cceda69">Compare the route. Estimate the rate.</p>
-</div>
-<aside class="c9d0aad" aria-labelledby="estimator-title">
-<div class="cd9440b">
-<div class="c7739d8"><h2 id="estimator-title">Swap estimator</h2><span class="c655067">Live estimate</span></div>
-<label class="c21bedc" for="amount">You pay</label>
-<div class="c8c0af8"><input id="amount" type="number" inputmode="decimal" min="1" max="1000000000" step="0.01" value="1000" aria-describedby="amount-help amount-error"><span class="c1ba031">units</span></div>
-<p class="cff8d92" id="amount-help">Enter 1–1,000,000,000 units, up to two decimal places.</p>
-<p class="c4c26e9" id="amount-error" aria-live="polite"></p>
-<div class="c26d062" aria-label="Swap route">
-<div class="c22180e"><span>From</span><div class="cffaf56"><img src="assets/tokens/usdc.svg" alt="USD Coin" width="28" height="28"></div></div>
-<span class="ca11eaf" aria-hidden="true">→</span>
-<div class="c22180e"><span>To</span><div class="cffaf56"><img src="assets/tokens/eth.svg" alt="Ethereum" width="28" height="28"></div></div>
-</div>
-<div class="c6959a7" aria-live="polite" aria-atomic="true">
-<p class="c867b11">Estimated amount received</p>
-<div class="cf02792"><output id="received" for="amount">998.25</output><span class="c1ba031">units</span></div>
-<dl class="c4f80ff">
-<div><dt>Estimated fee</dt><dd><output id="fee" for="amount">1.75</output> units</dd></div>
-<div><dt>Estimated time</dt><dd><output id="time" for="amount">5–7 min</output></dd></div>
-</dl>
-</div>
-<a class="c4ac33b" href="dashboard/">Swap <span class="c1a74bc" aria-hidden="true">→</span></a>
-<p class="c32b728">Fee = 0.15% of the amount + 0.25 units. Time starts at 2–4 minutes, adding one minute for every tenfold increase from 1 unit, rounded up.</p>
-<noscript><p class="cff8d92">Enable JavaScript to update the estimate as you change the amount.</p></noscript>
-</div>
-</aside>
-</section>
-<section class="cb332d1" id="key-facts" aria-labelledby="facts-title">
-<h2 class="c4dbe24" id="facts-title">Key facts</h2>
-<table class="cb56f02"><tbody><tr><th scope="row">Token</th><td>USDC — fiat-backed stablecoin</td></tr>
-<tr><th scope="row">Issuer</th><td>Circle</td></tr>
-<tr><th scope="row">Token standard</th><td>ERC-20 (plus native versions on other chains)</td></tr>
-<tr><th scope="row">Swap venue</th><td>Decentralized exchange liquidity pool</td></tr>
-<tr><th scope="row">Approval required</th><td>Yes — an ERC-20 allowance before the first swap</td></tr>
-<tr><th scope="row">Custody</th><td>Self-custody — you hold your keys throughout</td></tr></tbody></table>
-</section>
-<main class="c00843e" id="content">
-<section class="c5e0a11"><h2 class="cbe13ef">What It Means to Swap USDC</h2><div class="c7afa8a"><strong>To swap USDC is to exchange the stablecoin for another token through an automated liquidity pool, at a rate the pool's own reserves set in real time, rather than through a matched buy and sell order on a centralized book.</strong> When you swap USDC for ETH, the pool receives your USDC and releases ETH from its reserves, and the exchange rate shifts slightly with every trade depending on how much liquidity sits on each side. Because <a href="https://www.circle.com/en/usdc" rel="nofollow noopener" target="_blank">USDC is designed to track the US dollar</a>, it functions as the stable leg of the trade — the side whose value you can reason about — while the other token carries the price movement. This is why so many swaps start or end in USDC rather than in another volatile asset: it gives you a predictable reference point before and after the trade.</div></section>
-<section class="c5e0a11"><h2 class="cbe13ef">How to Swap USDC on a DEX, Step by Step</h2><div class="c7afa8a">The mechanics of a swap are the same across most decentralized exchanges, which is what makes the flow easy to repeat once you have done it the first time.<ul><li>Connect a self-custody wallet to the exchange and select USDC as the token you are selling.</li><li>Choose the token you want to receive, such as ETH, and enter the amount of USDC to swap.</li><li>Review the quoted rate, the slippage tolerance and the estimated price impact before continuing.</li><li>Approve USDC for the exchange's router contract if this is your first swap with it, then sign that transaction.</li><li>Confirm the swap transaction itself and wait for it to settle on-chain; the new token appears in your wallet in the same block cycle.</li></ul><h3>Connecting a Self-Custody Wallet</h3>A DEX never takes custody of your USDC before a swap. Your wallet signs each step directly, so the exchange can only move the exact amount you approve and only for the transaction you confirm. Reviewing the <a href="https://docs.uniswap.org/" rel="nofollow noopener" target="_blank">interface's own documentation</a> for the router you are using is worth the few minutes it takes, since it shows you exactly what each signature authorizes.</div></section>
-<section class="c5e0a11"><h2 class="cbe13ef">Token Approvals and ERC-20 Allowances</h2><div class="c7afa8a">USDC is an ERC-20 token, which means a smart contract cannot move it out of your wallet until you grant an allowance. The first time you swap USDC through a given exchange, your wallet will prompt a separate approval transaction before the swap itself can go through; after that, the same exchange can execute further swaps up to whatever limit you approved.<h3>Unlimited vs Limited Approvals</h3>Many interfaces default to an unlimited allowance so you never approve again, which is convenient but means the contract could move any amount of your USDC if it were ever compromised. A limited approval — just enough for the swap in front of you — costs a little more gas over time but keeps the exposure capped to that one trade.<h3>Revoking Old Allowances</h3>Allowances you granted months ago to a router you no longer use are still live until you revoke them. Checking and revoking stale approvals periodically, for instance through <a href="https://etherscan.io/tokenapprovalchecker" rel="nofollow noopener" target="_blank">Etherscan's token approval tool</a>, is a routine piece of wallet hygiene for anyone who swaps regularly.</div></section>
-<section class="c5e0a11"><h2 class="cbe13ef">Slippage and Price Impact When You Swap USDC</h2><div class="c7afa8a">Slippage tolerance sets how much the final rate can move against you between the moment you submit a swap and the moment it confirms; price impact is the rate change your own trade causes by consuming part of the pool's liquidity. Both matter more as the swap size grows relative to the pool, and both are shown before you sign so you can judge whether the trade is worth it at that size.<table><thead><tr><th>Slippage Setting</th><th>Typical Risk</th><th>Best Used For</th></tr></thead><tbody><tr><td>0.1%–0.5%</td><td>Swap may fail if the price moves fast</td><td>Deep pools, small or routine swaps</td></tr><tr><td>0.5%–1%</td><td>Balanced — usually settles without failing</td><td>Most everyday USDC swaps</td></tr><tr><td>1%+</td><td>Executes almost always, but at a worse rate</td><td>Thin pools or volatile tokens</td></tr></tbody></table><h3>Why Price Impact Matters on Large Swaps</h3>A small swap barely moves a deep pool's price, but a large one can push the rate noticeably against you even with modest slippage tolerance set. Splitting a large USDC swap into smaller pieces, or routing through a pool with deeper liquidity, is the usual way to keep price impact from eating into the amount you actually receive.</div></section>
-<section class="c5e0a11"><h2 class="cbe13ef">Swap USDC as a Stable Base Pair</h2><div class="c7afa8a">Most tokens on a given chain are quoted against USDC rather than against each other, because a stable, liquid base pair gives every other market a common reference point. When you swap USDC for a smaller or newer token, you are often trading against the deepest pool that token has, which is precisely why pairing against a stablecoin whose peg mechanics are <a href="https://en.wikipedia.org/wiki/Stablecoin" rel="nofollow noopener" target="_blank">well documented</a> matters for judging how reliable that liquidity really is.<h3>Native vs Bridged USDC</h3>Some chains run native USDC issued directly by Circle, while others only have a bridged representation wrapped by a third-party bridge. Native USDC can be redeemed and reissued without an extra trust assumption; bridged USDC depends on the bridge's own security. Checking which version a chain uses — and confirming the contract address on <a href="https://etherscan.io/token/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48" rel="nofollow noopener" target="_blank">Etherscan</a> before you swap — avoids trading into a token that only looks like USDC.<h3>Why Traders Route Through USDC</h3>Swapping token A for token B directly often means routing through a thin pool with wide spreads. Swapping A for USDC, then USDC for B, frequently nets a better price because USDC pairs are usually the deepest ones available, even though it looks like an extra step.</div></section>
-<section class="c5e0a11"><h2 class="cbe13ef">Self-Custody When You Swap USDC</h2><div class="c7afa8a">A decentralized swap never asks you to deposit USDC with a custodian before trading — the token leaves your wallet and the new asset arrives in the same signed transaction, with nothing held in between. The practical risks sit at the moment of signing rather than in a counterparty: confirm the token contract address, read the amount you will receive against the amount you are sending, and keep approvals limited to what you actually need. The <a href="https://ethereum.org/en/developers/docs/" rel="nofollow noopener" target="_blank">Ethereum developer documentation</a> covers how transaction signing and gas work in more depth if you want the mechanics behind what your wallet is showing you.</div></section>
-<section class="c5e0a11"><h2 class="cbe13ef">Swap USDC vs Trading on a Centralized Exchange</h2><div class="c7afa8a">A centralized exchange lets you trade USDC against other assets too, but it requires depositing funds into an account you do not control and trusting the exchange to honor withdrawals later. Swapping USDC on a decentralized exchange keeps the asset in your wallet the entire time and settles the trade in a single on-chain transaction, at the cost of paying network gas and managing your own approvals and slippage settings. For a quick, self-custodied trade between a stablecoin and a token like ETH, a DEX swap is usually the more direct route; for very large size or fiat on- and off-ramps, a centralized venue still has a role.</div></section><section class="c5e0a11 ce36297" id="related"><h2 class="cbe13ef">Related tools</h2><div class="c7afa8a"><ul><li><a href="https://paraswap-app.github.io/">How ParaSwap works</a></li><li><a href="https://crosschain-swap.github.io/">Cross-Chain Swap</a></li><li><a href="https://optimism-dex.github.io/">Optimism DEX explained</a></li><li><a href="https://spiritswap-app.github.io/">SpiritSwap</a></li><li><a href="https://swap-xrp.github.io/">XRP Swap</a></li></ul></div></section>
-<details class="c70fa23"><summary class="c6d85f1">What does it mean to swap USDC?</summary><div class="cb8a886">It means trading USDC for another token, such as ETH, through a decentralized exchange's liquidity pool at the current market rate, with the trade settling in a single on-chain transaction rather than through a custodial order book.</div></details>
-<details class="c70fa23"><summary class="c6d85f1">Do I need to approve USDC before I can swap it?</summary><div class="cb8a886">Yes. USDC is an ERC-20 token, so the first time you swap it through a given exchange's router you sign a separate approval transaction that grants the router an allowance, before the swap transaction itself can go through.</div></details>
-<details class="c70fa23"><summary class="c6d85f1">What is slippage when I swap USDC?</summary><div class="cb8a886">Slippage tolerance is how much the final rate can move against you between submitting the swap and it confirming. Setting it too tight can cause the swap to fail; setting it too loose can let the trade settle at a worse price than expected.</div></details>
-<details class="c70fa23"><summary class="c6d85f1">Why do so many swaps use USDC as the base pair?</summary><div class="cb8a886">USDC tracks the US dollar and usually has the deepest liquidity pools on a chain, so routing a trade through USDC rather than directly between two volatile tokens often nets a better price, even though it adds a step.</div></details>
-<details class="c70fa23"><summary class="c6d85f1">Is native USDC different from bridged USDC?</summary><div class="cb8a886">Yes. Native USDC is issued directly by Circle on that chain, while bridged USDC is a wrapped representation created by a third-party bridge and depends on that bridge's own security. Checking the contract address before you swap tells you which one you hold.</div></details>
-<details class="c70fa23"><summary class="c6d85f1">Does a DEX ever take custody of my USDC?</summary><div class="cb8a886">No. Your USDC stays in your wallet until the swap transaction executes, and the new token arrives in the same transaction. There is no deposit step and no custodian holding your funds in between.</div></details>
-<details class="c70fa23"><summary class="c6d85f1">Can price impact affect a USDC swap even with low slippage set?</summary><div class="cb8a886">Yes. Price impact comes from your own trade size relative to the pool's liquidity, which is separate from slippage tolerance. A large swap against a shallow pool can move the rate noticeably even if slippage protection never triggers.</div></details>
+
+<main>
+  <section class="hero">
+    <h1>Swap USDC</h1>
+
+    <section class="card" aria-label="Swap USDC">
+      <div class="tabs">
+        <button class="tab on" type="button">Swap</button>
+        <button class="tab" type="button">Limit</button>
+        <button class="tab" type="button">TWAP</button>
+        <span class="sp"></span>
+        <button class="ic gear" type="button" aria-label="Settings" data-toast="Settings are disabled in this demo."><svg aria-hidden="true"><use href="#i-gear"/></svg></button>
+      </div>
+
+      <div class="promo">
+        <div class="promo-txt">
+          <h2 class="promo-h">Swap USDC on Ethereum from your wallet</h2>
+          <p class="promo-sub">Route USDC to ETH, USDT, WETH or any ERC-20 through DEX liquidity. You sign every transaction.</p>
+        </div>
+        <div class="promo-grid" aria-hidden="true">
+          <span class="pico"><img src="assets/usd-coin-usdc.svg" alt=""></span>
+          <span class="pico"><img src="assets/tether-usdt.svg" alt=""></span>
+          <span class="pico"><img src="assets/ethereum-eth.svg" alt=""></span>
+          <span class="pico"><img src="assets/weth-round.svg" alt=""></span>
+        </div>
+      </div>
+
+      <div class="cta-wrap"><a class="cta" href="/dashboard/" style="display:flex;align-items:center;justify-content:center;text-decoration:none">Swap</a></div>
+    </section>
+  </section>
+
+  <section class="learn" id="learn">
+    <p class="learn-h">Learn about swapping USDC</p>
+    <div class="lrow">
+      <details class="lcard" name="learn" id="overview"><summary><span>What is USDC</span><span class="chev" aria-hidden="true"></span></summary><div class="lbody"><h2>What you are swapping when you swap USDC</h2>
+<p><strong>USDC</strong> is a dollar-pegged stablecoin issued by Circle and used on Ethereum as an ERC-20 token. People swap USDC to buy ETH or another token, to move between stablecoins such as USDT, or to go back to dollars after a trade.</p>
+<h3>Native USDC vs USDC.e</h3>
+<p>On some Layer 2 networks two versions exist: native USDC, issued directly by Circle on that chain, and bridged USDC.e, a wrapped copy created by a bridge. They can trade at similar prices but are different contracts with different backing paths. On Ethereum mainnet there is one USDC contract, so check the address before you trade.</p>
+<h3>How the swap works</h3>
+<p>A DEX router searches liquidity pools for a route, shows the expected output, and you sign the swap from your own wallet.</p></div></details>
+
+      <details class="lcard" name="learn" id="compare"><summary><span>Stable vs volatile</span><span class="chev" aria-hidden="true"></span></summary><div class="lbody"><h2>USDC to a stablecoin vs USDC to a volatile token</h2>
+<p>Both are market swaps, but the risk profile differs. The price of the token you receive is what changes most.</p>
+<div class="tbl"><table>
+<caption>USDC → stablecoin vs USDC → volatile token</caption>
+<thead><tr><th scope="col"></th><th scope="col">USDC → stablecoin</th><th scope="col">USDC → volatile token</th></tr></thead>
+<tbody>
+<tr><th scope="row">Example pair</th><td>USDC ↔ USDT</td><td>USDC ↔ ETH or another token</td></tr>
+<tr><th scope="row">Price impact</th><td>usually low in deep pools</td><td>varies with pool depth and trade size</td></tr>
+<tr><th scope="row">Slippage setting</th><td>a tight tolerance is often enough</td><td>may need a wider tolerance for thin pools</td></tr>
+<tr><th scope="row">Typical use</th><td>switching stablecoins, rebalancing</td><td>buying exposure, taking profit into USDC</td></tr>
+</tbody>
+</table></div>
+<h3>Still a market swap</h3>
+<p>A USDC↔USDT swap is not a fixed 1:1 conversion. It is priced by pool balances, so the quote can differ from one dollar per token, especially during market stress.</p></div></details>
+
+      <details class="lcard" name="learn" id="how"><summary><span>How to swap</span><span class="chev" aria-hidden="true"></span></summary><div class="lbody"><h2>How to swap USDC</h2>
+<h3>Route and quote</h3>
+<p>The interface asks DEX liquidity for the best route, then shows the expected output, price impact, estimated gas and your slippage tolerance. Nothing is signed until you confirm.</p>
+<h3>Step by step</h3>
+<ol>
+<li>Connect your wallet on Ethereum and set USDC as the sell token and your target token as the buy token.</li>
+<li>Enter an amount and review the quote, route and estimated gas.</li>
+<li>Approve USDC once if this is the first time this wallet swaps it through the router.</li>
+<li>Sign the swap in your wallet and wait for it to confirm on-chain.</li>
+<li>Check that the bought token arrived at your wallet address.</li>
+</ol>
+<p>To go back, reverse the pair: sell the token for USDC.</p></div></details>
+
+      <details class="lcard" name="learn" id="fees"><summary><span>Fees &amp; gas</span><span class="chev" aria-hidden="true"></span></summary><div class="lbody"><h2>What a USDC swap costs</h2>
+<h3>Gas</h3>
+<p>Gas on Ethereum is paid in ETH, never in USDC. The one-time approval and the swap are separate transactions. See how <a href="https://ethereum.org/en/developers/docs/gas/" target="_blank" rel="nofollow noopener">gas works</a>.</p>
+<h3>Trading cost</h3>
+<p>The quote already reflects pool fees, price impact and any aggregator fee. Your slippage tolerance sets the lowest output you will accept before the transaction reverts.</p>
+<h3>One-time approval</h3>
+<p>USDC is an ERC-20 token, so the router needs an allowance to move it. Later swaps from the same wallet reuse that allowance. Keep some ETH in the wallet, or you cannot approve or sign.</p></div></details>
+
+      <details class="lcard" name="learn" id="security"><summary><span>Security</span><span class="chev" aria-hidden="true"></span></summary><div class="lbody"><h2>Staying safe when you swap USDC</h2>
+<h3>Non-custodial by design</h3>
+<p>You connect your own wallet and sign every transaction yourself. The interface quotes and routes; it never holds your funds or keys.</p>
+<h3>Before you sign</h3>
+<ul>
+<li>Verify the USDC contract address against Circle's published list; fake USDC tokens exist.</li>
+<li>On Layer 2 networks, confirm whether you hold native USDC or bridged USDC.e.</li>
+<li>Approve only the amount you need and revoke old <a href="https://ethereum.org/en/developers/docs/standards/tokens/erc-20/" target="_blank" rel="nofollow noopener">ERC-20</a> allowances you no longer use.</li>
+<li>Check the quote, price impact and slippage before confirming.</li>
+<li>A stablecoin can lose its peg and smart contracts can contain bugs, so risk is never zero.</li>
+</ul></div></details>
+
+      <details class="lcard" name="learn" id="faq"><summary><span>FAQ</span><span class="chev" aria-hidden="true"></span></summary><div class="lbody lfaq"><h2>Swap USDC FAQ</h2>
+<h3>Can I swap USDC for ETH without a centralized exchange?</h3>
+<p>Yes. This interface routes your USDC through on-chain DEX liquidity, and you sign the swap from your own wallet. No account is created and no funds are deposited with the interface.</p>
+<h3>Why do I need to approve USDC before swapping?</h3>
+<p>USDC is an ERC-20 token, so the router needs an allowance to move it on your behalf. The approval is a separate transaction that costs gas, and it is usually needed only once per wallet and router. Native ETH needs no approval.</p>
+<h3>Is swapping USDC to USDT always 1:1?</h3>
+<p>No. It is a market swap priced by pool balances, so the output is usually close to one-to-one in deep pools but can drift. Check the quote and price impact before you sign.</p>
+<h3>What is the difference between USDC and USDC.e?</h3>
+<p>Native USDC is issued by Circle directly on a given chain, while USDC.e is a bridged version created through a bridge. They are separate contracts, so verify which one you hold and which one the destination expects.</p>
+<h3>Which token pays gas when I swap USDC?</h3>
+<p>ETH pays gas on Ethereum. Holding only USDC is not enough, because you need ETH in the same wallet to approve and sign the swap.</p>
+<h3>Can I swap USDC for any ERC-20 token?</h3>
+<p>You can swap USDC for any ERC-20 token that has enough on-chain liquidity for a route. For thin or new tokens, expect higher price impact and verify the contract address first.</p></div></details>
+    </div>
+  </section>
 </main>
-<section class="c445bcf" id="sources" aria-labelledby="sources-title">
-<h2 class="c4dbe24" id="sources-title">Sources</h2>
-<ul class="c4e45ca"><li><a class="ce62fc5" href="https://www.circle.com/en/usdc" rel="nofollow noopener" target="_blank">Circle — USDC overview</a></li>
-<li><a class="ce62fc5" href="https://docs.uniswap.org/" rel="nofollow noopener" target="_blank">Uniswap documentation</a></li>
-<li><a class="ce62fc5" href="https://etherscan.io/token/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48" rel="nofollow noopener" target="_blank">USDC token contract on Etherscan</a></li>
-<li><a class="ce62fc5" href="https://en.wikipedia.org/wiki/Stablecoin" rel="nofollow noopener" target="_blank">Wikipedia — Stablecoin</a></li></ul>
-</section>
-<footer class="c5ee745"><p>Updated Nov 07, 2026</p><a href="#top">Back to top <span aria-hidden="true">↑</span></a></footer>
-</div>
+
+<footer>
+  <div class="foot"><span>&copy; 2026 Swap USDC</span><span class="sep">&middot;</span><a href="legal.html#privacy">Privacy</a><span class="sep">&middot;</span><a href="legal.html#terms">Terms</a><span class="sep">&middot;</span><span>Non-custodial &middot; USDC on Ethereum</span></div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
 <script>
-(() => {
-  const amount = document.getElementById('amount');
-  const received = document.getElementById('received');
-  const fee = document.getElementById('fee');
-  const time = document.getElementById('time');
-  const error = document.getElementById('amount-error');
-  const format = new Intl.NumberFormat('en', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-  let timer;
-  function update() {
-    const value = amount.valueAsNumber;
-    if (!Number.isFinite(value) || !amount.validity.valid) {
-      amount.setAttribute('aria-invalid', 'true');
-      error.textContent = 'Enter an amount from 1 to 1,000,000,000 with up to two decimal places.';
-      received.value = '—';
-      fee.value = '—';
-      time.value = '—';
-      return;
-    }
-    amount.removeAttribute('aria-invalid');
-    error.textContent = '';
-    const amountCents = Math.round(value * 100);
-    const feeCents = Math.round(amountCents * 0.0015 + 25);
-    const minutes = 2 + Math.ceil(Math.log10(value));
-    received.value = format.format((amountCents - feeCents) / 100);
-    fee.value = format.format(feeCents / 100);
-    time.value = minutes + '–' + (minutes + 2) + ' min';
-  }
-  amount.addEventListener('input', () => {
-    clearTimeout(timer);
-    timer = setTimeout(update, 180);
-  });
-  amount.addEventListener('change', () => {
-    clearTimeout(timer);
-    update();
-  });
-  update();
+(function(){
+"use strict";
+var tabs=[].slice.call(document.querySelectorAll('.tab'));
+tabs.forEach(function(t){t.addEventListener('click',function(){tabs.forEach(function(x){x.classList.toggle('on',x===t);});});});
+
+var toast=document.getElementById('toast'),tT;
+function notify(m){toast.textContent=m;toast.classList.add('show');clearTimeout(tT);tT=setTimeout(function(){toast.classList.remove('show');},3000);}
+[].slice.call(document.querySelectorAll('[data-toast]')).forEach(function(b){b.addEventListener('click',function(){notify(b.getAttribute('data-toast'));});});
+
+function openHash(){var id=location.hash.slice(1);if(!id)return;var c=document.getElementById(id);if(c&&c.matches&&c.matches('.lcard[name="learn"]'))c.open=true;}
+window.addEventListener('hashchange',openHash);openHash();
+[].slice.call(document.querySelectorAll('.nlinks a')).forEach(function(a){a.addEventListener('click',function(){var c=document.getElementById(a.getAttribute('href').slice(1));if(c&&c.matches('.lcard'))c.open=true;});});
 })();
 </script>
-</body>
-</html>
+</body></html>

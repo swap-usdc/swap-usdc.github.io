@@ -1,0 +1,1 @@
+{"name":"Swap USDC","short_name":"Swap USDC","description":"Swap USDC for ETH, USDT, WETH or any ERC-20 token on Ethereum through DEX routing. Non-custodial: you review the quote and sign from your own wallet.","start_url":"/","display":"standalone","background_color":"#f4f6f9","theme_color":"#f4f6f9","icons":[{"src":"icon.svg","sizes":"any","type":"image/svg+xml"}]}
